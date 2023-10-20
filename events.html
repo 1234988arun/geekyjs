@@ -1,0 +1,228 @@
+<!-- HTML events are "things" that happen to HTML elements.
+
+When JavaScript is used in HTML pages, JavaScript can "react" on these events. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+    <style>
+#one{
+    width: 400px;
+    height: 400px;
+    background: tomato;
+}
+#two{
+    width: 300px;
+    height: 300px;
+    background: skyblue;
+}
+#three{
+    width: 200px;
+    height: 200px;
+    background: pink;
+}
+#four{
+    width: 100px;
+    height: 100px;
+    background: green;
+}
+
+</style> 
+</head>
+<body>
+<!-- using html for jsevent flow event propogation -->
+    <!-- <div id="one">
+        1
+        <div id="two">
+            2
+             <div id="three">
+                3
+                <div id="four">
+                    4
+                </div> 
+            </div>
+        </div>  -->
+
+<button class="testing">testing</button>
+
+
+
+
+</div>
+<!-- <button id="myBtn">My button</button> -->
+<!-- <p id="myp" class="myclass2 myclass3">paragraph</p> -->
+<!-- <button onclick="alert('button clicked')">please click me</button> -->
+<!-- the above button on click event is event binding with html events  -->
+<!-- <button id="myBtn">Mybutton</button>
+<button id="one">Mybutton1</button>
+<button id="two">Mybutton2</button>  -->
+<script>
+// 1 example <!-- the  button on click event is event binding with javascript
+    //  events  
+// let btnEl = document.getElementById('myBtn');
+// btnEl.onclick = function (){
+//     alert('button clicked')
+// }// this is anonymous function(a function without name) on click event 
+
+// 2example overwriting Event handler we cant use multiple function using same 
+// event like click event
+
+// document.getElementById('myBtn').onclick = function(){
+//     alert("iam clicked 1")
+// };;
+// document.getElementById('myBtn').onclick = function(){
+//     alert("iam clicked 2")
+// };;
+
+// this result always shows second statement to overcome this we use event listner
+
+// let buttonEl = document.getElementById('myBtn');
+
+// buttonEl.addEventListener('click', ()=>{
+// alert('hello iam first')
+// })
+// buttonEl.addEventListener('click',()=> alert('hey iam second'));
+// buttonEl.addEventListener('click', ()=>{
+// alert('hello iam third')
+// })
+
+// add event listener takes 3 parameter 
+
+// remove add event listener
+// This method is used to remove handlers, with the same arguments given when the event was added.
+
+// function show(){
+//     alert('hey iam a function')
+// }
+// let btnEl = document.getElementById('myBtn');
+// btnEl.addEventListener('click', show, true);
+// btnEl.addEventListener('click', show, false);
+
+// btnEl.removeEventListener('click', show, true);//same property last wali lga do jise remove karna hai
+
+
+// dom event flow/event propogation 
+// the dom2 event model specification describes a standard way to create, capture, handle, and cancel in a tree structure such as an XHTML document's object hierarchy.
+// phases
+// capture phase
+// target phase
+// bubbling phase
+
+// bubbling phase
+// ye down to top jata hai or apne sath jettne bhi parent element agar unpe click event laga hai to unhe bhi capture kar lega
+
+// document.getElementById("one").addEventListener("click", function(){
+// console.log("1")},false);
+// // document.getElementById('two').addEventListener('click', function(){
+// // console.log('2')},false);
+// // document.getElementById('three').addEventListener('click', function(){
+// // console.log('3')},false);
+// document.getElementById('four').addEventListener('click', function(){
+// console.log('4')},false);
+
+// let one = document.getElementById('one');
+// one.addEventListener('click',(e)=>{
+// // console.log(e.target);
+// // console.log(e.currentTarget);
+// }) 
+
+// Capture phase
+// ye  top to down jata hai or apne sath jettne bhi parent element agar unpe click event laga hai to unhe bhi capture kar lega
+// document.getElementById("one").addEventListener("click", function(){
+// console.log("1")},true);
+// document.getElementById('two').addEventListener('click', function(){
+// console.log('2')},true);
+// document.getElementById('three').addEventListener('click', function(){
+// console.log('3')},true);
+// // document.getElementById('four').addEventListener('click', function(){
+// // console.log('4')},true);
+
+// Event object(most important topic used in addevent listener as a argument)
+
+// dom events pass an event object as an argument to handlers. this object contains extra information aboout the event that occured.
+
+
+// let buttonOne= document.getElementById("one")
+
+// buttonOne.addEventListener('click', function(e){
+// console.log('clickme')
+// })
+
+
+// let btnEl = document.getElementById('one');
+// btnEl.addEventListener('click', (e)=>{
+// // console.log(e);
+// // console.log(e.clientX);
+// // // console.log(e.clientY);
+// // console.log(e.type);
+// // console.log(e.target);
+// // console.log(e.currentTarget);
+// })
+
+// diff between target and current target?
+
+// MouseEvent
+// mousedown(it fires, when mouse button is pressed down.)
+// mouseup(it fires, when mouse button is released down.)
+// contextmenu(it fires, when right mouse button is clicked.)
+
+// let oneEl = document.getElementById('one');
+// let twoEl = document.getElementById('two');
+
+// oneEl.addEventListener('mousedown', ()=>{
+// console.log('mousedown');
+// })
+
+// twoEl.addEventListener('mouseup', ()=>{
+// console.log('mouseup');
+// })
+
+
+// curent target and target
+
+// dom tokenlist
+// the dom token list interface represents a set of space-separated tokens. such a set is returned by element.classlist, it is indexed begining with 0 as with Javascript Array objects. Dom takenlist is always case-sensitive.
+
+// properties length value
+
+// methods item(),add(),remove,replace,contains, toggle(), value()
+
+// class list(dynamically creating deleting etc css class with the help of js)
+
+// the element.classlist is a readonly property which returns a live domtokenlist collection of the class attributes of the element.
+// syntax let elementClasses = elementNodeReference.classList;
+// simple class list property return karega dom tokenlist or dom token list ki proeprty excess kar paoge class list property se.
+
+// let p = document.getElementById("myp");
+// console.log(p.classList);//contains all the class in p elemelnt and class list proeperty like length,value;
+// console.log(p.classList[0]);//contains specific  class in p elemelnt
+// console.log(p.classList.length);//check how many classes  in p elemelnt
+// console.log(p.classList.value);//show all class name present in p element
+// (p.classList.add('myclass4','myclass5','myclass6'));
+// (p.classList.remove('myclass3'));
+// (p.classList.replace('myclass3','myclass4'));
+// console.log(p);
+//   contains class(mostimportant)
+// console.log(p.classList.contains('myclass4'));
+// p.classList.toggle('myclass3');//agar hai class html main to hata do ni hai to daal do class
+// console.log(p);
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+<!-- // reamining topics to learn from Events
+onchange,onkeydown,onload -->
+
+
+
